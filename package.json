@@ -1,0 +1,23 @@
+{
+  "name": "@sir_koty/cypher",
+  "version": "1.0.0",
+  "description": "Encrypt and Decrypt huge data",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sir_koty_cypher"
+  ],
+  "author": "sir_koty",
+  "license": "ISC",
+  "dependencies": {
+    "jsencrypt": "^3.0.0-rc.1",
+    "quick-encrypt": "^1.0.8"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {}
+}
