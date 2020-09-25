@@ -1,5 +1,4 @@
-import QuickEncrypt from 'quick-encrypt';
-
+const NodeRSA = require('node-rsa');
 export namespace Cypher {
 
     /**
@@ -16,9 +15,11 @@ export namespace Cypher {
         } else {
             dataString = data;
         }
+        const encryptor = new NodeRSA(publicKey);
+        encryptor.setOptions({ encryptionScheme: 'pkcs1' });
         
         // secure data
-        const dataEncrypted = dataString.match(/.{1,190}/g).map((str: string) => QuickEncrypt.encrypt(str, publicKey));
+        const dataEncrypted = dataString.match(/.{1,190}/g).map((str: string) => encryptor.encrypt(str, 'base64', 'ascii'));
         return dataEncrypted;
     }
 
@@ -37,8 +38,9 @@ export namespace Cypher {
             dataString = data;
         }
 
+        const encryptor = new NodeRSA(publicKey);
         // secure data
-        return QuickEncrypt.encrypt(dataString, publicKey);
+        return encryptor.encrypt(dataString, 'base64');
 
     }
 
@@ -52,9 +54,11 @@ export namespace Cypher {
             return cryptData;
         }
         let plainText = '', result = '', finalResult = '';
-
+        
+        const decryptor = new NodeRSA(privateKey);
+        decryptor.setOptions({ encryptionScheme: 'pkcs1' });
         cryptData.forEach(valuex => {
-            result = QuickEncrypt.decrypt(valuex, privateKey);
+            result = decryptor.decrypt(valuex, 'utf8');
             if (Object.is(result, null)) {
                 throw new Error('Erreur lors du décryptage');
             }
