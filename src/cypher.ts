@@ -1,4 +1,8 @@
-const NodeRSA = require('node-rsa');
+//const NodeRSA = require('node-rsa');
+const JSEncrypt = require('js-encrypt').JSEncrypt;
+const encryptor = new JSEncrypt();
+const decryptor = new JSEncrypt();
+
 export namespace Cypher {
 
     /**
@@ -15,11 +19,15 @@ export namespace Cypher {
         } else {
             dataString = data;
         }
-        const encryptor = new NodeRSA(publicKey);
-        encryptor.setOptions({ encryptionScheme: 'pkcs1' });
+        // const encryptor = new NodeRSA(publicKey);
+        // encryptor.setOptions({ encryptionScheme: 'pkcs1' });
+        encryptor.setPublicKey(publicKey);
         
         // secure data
-        const dataEncrypted = dataString.match(/.{1,190}/g).map((str: string) => encryptor.encrypt(str, 'base64', 'ascii'));
+        const dataEncrypted = dataString.match(/.{1,190}/g).map((str: string) => { 
+            // return encryptor.encrypt(str, 'base64', 'ascii');
+            return encryptor.encrypt(str);
+        });
         return dataEncrypted;
     }
 
@@ -37,10 +45,11 @@ export namespace Cypher {
         } else {
             dataString = data;
         }
+        encryptor.setPublicKey(publicKey);
 
-        const encryptor = new NodeRSA(publicKey);
+        // const encryptor = new NodeRSA(publicKey);
         // secure data
-        return encryptor.encrypt(dataString, 'base64');
+        return encryptor.encrypt(dataString);
 
     }
 
@@ -54,11 +63,12 @@ export namespace Cypher {
             return cryptData;
         }
         let plainText = '', result = '', finalResult = '';
-        
-        const decryptor = new NodeRSA(privateKey);
-        decryptor.setOptions({ encryptionScheme: 'pkcs1' });
+        decryptor.setPrivateKey(privateKey);
+        //const decryptor = new NodeRSA(privateKey);
+        //decryptor.setOptions({ encryptionScheme: 'pkcs1' });
         cryptData.forEach(valuex => {
-            result = decryptor.decrypt(valuex, 'utf8');
+            // result = decryptor.decrypt(valuex, 'utf8');
+            result = decryptor.decrypt(valuex);
             if (Object.is(result, null)) {
                 throw new Error('Erreur lors du décryptage');
             }
