@@ -1,6 +1,6 @@
 {
   "name": "@sir_koty/cypher",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "Base on JS encrypt library this library helps you to encrypt and decrypt huge data. The library works with rsa 2048 keys pairs",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

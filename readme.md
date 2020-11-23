@@ -17,13 +17,17 @@ import { Cypher } from "@sir_koty/cypher-library";
 const public_key = `MY_SECRET_RSA_2048_PUBLIC_KEY`;
 const private_key = `MY_SECRET_RSA_2048_PRIVATE_KEY`;
 
+// Set rsa key (2048)
+Cypher.setPrivateKey(private_key);
+Cypher.setPublicKey(public_key);
+
 // Encryption
 const clearText = "Hello world .... MMMMM"; // You can put more than 214 characters
-const encrytedData = Cypher.encrypt(clearText, public_key); 
+const encrytedData = Cypher.encrypt(clearText); 
 console.log('encrypted data ', encryptedData); // [XXXXXX, ZZZZZZ];
 
 // Decryption
-const decryptedData = Cypher.decrypt(encrytedData, private_key);
+const decryptedData = Cypher.decrypt(encrytedData);
 console.log('decrypted data ', decryptedData); // "Hello world .... MMMMM" (clearText)
 
 ```

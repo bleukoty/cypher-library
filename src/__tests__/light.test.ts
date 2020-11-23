@@ -38,11 +38,15 @@ AgMBAAE=
 -----END PUBLIC KEY-----`;
 const phrase = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et molestie felis. Fusce sed pellentesque ex, ut interdum leo. Maecenas ac turpis a turpis elementum laoreet nec at sem. Mauris sagittis consectetur eros.`;
 const phrase_2 = `${phrase} xxxxxxxxx`;
-const encrypted_data = Cypher.encrypt(phrase, public_key);
-const encrypted_data_2 = Cypher.encrypt(phrase_2, public_key);
 
-const decrypted_data = Cypher.decrypt(encrypted_data, private_key);
-const decrypted_data_2 = Cypher.decrypt(encrypted_data_2, private_key);
+Cypher.setPrivateKey(private_key);
+Cypher.setPublicKey(public_key);
+
+const encrypted_data = Cypher.encrypt(phrase);
+const encrypted_data_2 = Cypher.encrypt(phrase_2);
+
+const decrypted_data = Cypher.decrypt(encrypted_data);
+const decrypted_data_2 = Cypher.decrypt(encrypted_data_2);
 
 test("Test 1: encryptage data with length <= 214", () => {
   expect(encrypted_data.length).toBe(1);
@@ -58,4 +62,14 @@ test("Test 3: decrypt data enrypted with phrase length <= 214", () => {
 
 test("Test 4: decrypt data enrypted with phrase length > 214", () => {
   expect(phrase_2).toBe(decrypted_data_2);
+});
+
+test("Test 5: decrypt data enrypted with phrase length > 214 (async)", async () => {
+  const a_decrypted_data = await Cypher.decryptASync(encrypted_data);
+  expect(phrase).toBe(a_decrypted_data);
+});
+
+test("Test 6: decrypt data enrypted with phrase length <= 214 (async)", async () => {
+    const a_decrypted_data_2 = await Cypher.decryptASync(encrypted_data_2);
+    expect(phrase_2).toBe(a_decrypted_data_2);
 });
