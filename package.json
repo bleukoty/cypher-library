@@ -1,11 +1,12 @@
 {
   "name": "@sir_koty/cypher",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Base on JS encrypt library this library helps you to encrypt and decrypt huge data. The library works with rsa 2048 keys pairs",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --config jestconfig.json",
+    "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\""
   },
   "keywords": [

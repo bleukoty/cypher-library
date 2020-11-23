@@ -1,4 +1,4 @@
-import { Cypher } from "../cypher";
+import { Cypher } from '../cypher';
 const private_key = `-----BEGIN RSA PRIVATE KEY-----
 MIIEoQIBAAKCAQBZJlCYwEjdhoDAaaOyKwkf+oQ4nad9dIBb+Uep0vBHFBsGO6Ws
 dscUlGIWznuVKKMp2NYW0Sxg067ANU1FU874IGFyPKc8k9/nfrVTkWXSfkRVn5XO
@@ -48,28 +48,28 @@ const encrypted_data_2 = Cypher.encrypt(phrase_2);
 const decrypted_data = Cypher.decrypt(encrypted_data);
 const decrypted_data_2 = Cypher.decrypt(encrypted_data_2);
 
-test("Test 1: encryptage data with length <= 214", () => {
+test('Test 1: encryptage data with length <= 214', () => {
   expect(encrypted_data.length).toBe(1);
 });
 
-test("Test 2: encryptage data with length > 214", () => {
+test('Test 2: encryptage data with length > 214', () => {
   expect(encrypted_data_2.length).toBeGreaterThan(1);
 });
 
-test("Test 3: decrypt data enrypted with phrase length <= 214", () => {
+test('Test 3: decrypt data enrypted with phrase length <= 214', () => {
   expect(phrase).toBe(decrypted_data);
 });
 
-test("Test 4: decrypt data enrypted with phrase length > 214", () => {
+test('Test 4: decrypt data enrypted with phrase length > 214', () => {
   expect(phrase_2).toBe(decrypted_data_2);
 });
 
-test("Test 5: decrypt data enrypted with phrase length > 214 (async)", async () => {
+test('Test 5: decrypt data enrypted with phrase length > 214 (async)', async () => {
   const a_decrypted_data = await Cypher.decryptASync(encrypted_data);
   expect(phrase).toBe(a_decrypted_data);
 });
 
-test("Test 6: decrypt data enrypted with phrase length <= 214 (async)", async () => {
-    const a_decrypted_data_2 = await Cypher.decryptASync(encrypted_data_2);
-    expect(phrase_2).toBe(a_decrypted_data_2);
+test('Test 6: decrypt data enrypted with phrase length <= 214 (async)', async () => {
+  const a_decrypted_data_2 = await Cypher.decryptASync(encrypted_data_2);
+  expect(phrase_2).toBe(a_decrypted_data_2);
 });

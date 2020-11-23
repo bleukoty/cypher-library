@@ -33,9 +33,9 @@ console.log('decrypted data ', decryptedData); // "Hello world .... MMMMM" (clea
 ```
 
 ## Demo
-    #Stackblitz : https://stackblitz.com/edit/cypher-sample?file=src%2Fapp%2Fapp.component.ts
+    [demo-stackblitz](https://stackblitz.com/edit/cypher-sample?file=src%2Fapp%2Fapp.component.ts)
 
-## version 2.0.3
+## version 2.1.1
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
